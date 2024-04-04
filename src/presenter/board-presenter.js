@@ -24,4 +24,15 @@ export default class BoardPresenter {
       render(new PointView(), this.eventListComponent.getElement());
     }
   }
+
+  // this.point.array.forEach(element => {
+  //   render(
+  //     new PointView ({
+  //       point,
+  //       pointDestination: this.destinationModel.getById(point.destination),
+  //       pointOffers: this.offersModel.getByType(point.type)
+  //     }),
+  //     this.eventListComponent.getElement()
+  //   );
+  // });
 }
