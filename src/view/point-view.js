@@ -1,5 +1,5 @@
 import { createElement } from '../render';
-import { createPointTemplate } from '../point-template';
+import { createPointTemplate } from '../view/point-template';
 
 export default class PointView {
   constructor({point, pointDestination, pointOffers}) {

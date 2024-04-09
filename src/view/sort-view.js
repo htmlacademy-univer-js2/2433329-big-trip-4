@@ -1,5 +1,5 @@
 import { createElement } from '../render';
-import { createListSortElement } from '../sort-template';
+import { createListSortElement } from '../view/sort-template';
 
 export default class ListSortElement {
   getFilter(){

@@ -63,4 +63,4 @@ function getPointDuration(dateForm, dateTo) {
   return pointDuration;
 }
 
-export {getRandomValue, formatStringToDateTime, formatStringToShortDate, formatStringToTime, capitalize, getPointDuration};
+export {getRandomValue, formatStringToDateTime, formatStringToShortDate, formatStringToTime, capitalize, getPointDuration, getRandomInteger};

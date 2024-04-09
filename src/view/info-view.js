@@ -1,5 +1,5 @@
 import { createElement } from '../render';
-import { mainInfo } from '../info-template';
+import { mainInfo } from '../view/info-template';
 
 export default class MainInfo {
   getFilter(){
