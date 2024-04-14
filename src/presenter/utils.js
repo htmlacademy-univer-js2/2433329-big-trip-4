@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import {/* DurationFormat */ FilterType} from '../mock/const';
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -21,6 +22,8 @@ function getRandomInteger(a = 0, b = 1) {
 
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 }
+
+// const getRandomDate = (start = new Date(2022, 0, 1), end = new Date(2025, 0, 1)) => new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 
 function getRandomValue(items) {
   return items [getRandomInteger(0, items.length - 1)];
@@ -63,4 +66,15 @@ function getPointDuration(dateForm, dateTo) {
   return pointDuration;
 }
 
-export {getRandomValue, formatStringToDateTime, formatStringToShortDate, formatStringToTime, capitalize, getPointDuration, getRandomInteger};
+const isPointFuture = (point) => dayjs().isBefore(point.dateFrom);
+const isPointPresent = (point) => dayjs().isAfter(point.dateFrom) && dayjs().isBefore(point.dateTo);
+const isPointPast = (point) => dayjs().isAfter(point.dateTo);
+
+const filterByType = {
+  [FilterType.ANY]: (points) => [...points],
+  [FilterType.FUTURE]: (points) => points.filter((point) => isPointFuture(point)),
+  [FilterType.PRESENT]: (points) => points.filter((point) => isPointPresent(point)),
+  [FilterType.PAST]: (points) => points.filter((point) => isPointPast(point))
+};
+
+export {getRandomValue, formatStringToDateTime, formatStringToShortDate, formatStringToTime, capitalize, getPointDuration, getRandomInteger, filterByType};
