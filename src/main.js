@@ -1,40 +1,28 @@
-import ListFilterElement from './view/filter-view';
-import {render, RenderPosition} from './render';
-// import ListSortElement from './view/sort-view';
-// import ListElement from './view/point-view';
-// import NewPoint from './view/add-new-point';
-// import EventListView from './view/event-list-view';
-import BoardPresenter from './presenter/board-presenter';
-import MainInfo from './view/info-view';
-
-import MockService from './service/mock-service';
-import DestinationsModel from './model/destinations-model';
-import OffersModel from './model/offers-model';
-import PointsModel from './model/points-model';
-
-const bodyElement = document.querySelector('body');
-const headerElement = bodyElement.querySelector('.page-header');
-const siteListFilter = headerElement.querySelector('.trip-controls__filters');
-const tripMain = headerElement.querySelector('.trip-main');
-const eventsList = bodyElement.querySelector('.trip-events');
-
-// const tripInfoElement = headerElement.querySelector('.trip-main');
-// const filterElement = tripInfoElement.querySelector('.trip-controls__filters');
+import PointsModel from './model/points-model.js';
+import OffersModel from './model/offers-model.js';
+import DestinationsModel from './model/destinations-model.js';
+import FiltersPresenter from './presenter/filters-presenter.js';
+import TripInfoPresenter from './presenter/trip-info-presenter.js';
+import MockService from './service/mock-service.js';
+import LeaderPresenter from './presenter/leader-presenter.js';
 
 const mockService = new MockService();
+const pointsModel = new PointsModel(mockService);
+const offersModel = new OffersModel(mockService);
 const destinationsModel = new DestinationsModel(mockService);
-const offerModel = new OffersModel(mockService);
-const pointModel = new PointsModel(mockService);
-// const filtersPresenter = new FiltersPresenter({ pointsModel });
 
-const boardPresenter = new BoardPresenter({
-  container: eventsList,
-  destinationsModel,
-  offerModel,
-  pointModel
+const container = document.querySelector('.trip-events');
+
+const leaderPresenter = new LeaderPresenter({
+  container,
+  pointsModel,
+  offersModel,
+  destinationsModel
 });
 
-render(new MainInfo(), tripMain, RenderPosition.AFTERBEGIN);
-render(new ListFilterElement(), siteListFilter);
+const filtersPresenter = new FiltersPresenter({ pointsModel });
+const tripInfoPresenter = new TripInfoPresenter();
 
-boardPresenter.init();
+leaderPresenter.init();
+filtersPresenter.init();
+tripInfoPresenter.init();

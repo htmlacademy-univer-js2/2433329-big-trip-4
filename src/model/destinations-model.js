@@ -1,12 +1,11 @@
 //Модель для хранения данных для отображения пунктов наначения
-
 export default class DestinationsModel {
   #service = null;
   #destinations = null;
 
   constructor(service) {
     this.#service = service;
-    this.#destinations = this.#service.getDestinations();
+    this.#destinations = this.#service.destinations;
   }
 
   get() {
@@ -14,7 +13,6 @@ export default class DestinationsModel {
   }
 
   getById(id) {
-    return this.#destinations
-      .find((destination) => destination.id === id);
+    return this.#destinations.find((destination) => destination.id === id);
   }
 }
