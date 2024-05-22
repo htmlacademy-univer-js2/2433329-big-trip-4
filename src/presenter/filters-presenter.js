@@ -1,4 +1,7 @@
-import { render} from '../framework/render.js';
+import {
+  render
+} from '../framework/render.js';
+
 import FiltersView from '../view/filters-view.js';
 import { FilterSettings } from '../const.js';
 import { filterByType } from '../utils';
