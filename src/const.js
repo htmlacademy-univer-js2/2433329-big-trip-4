@@ -11,7 +11,7 @@ const MSEC_IN_HOUR = MSEC_IN_SEC * SEC_IN_MIN * MIN_IN_HOUR;
 const MSEC_IN_DAY = MSEC_IN_HOUR * HOUR_IN_DAY;
 const BASE_EVENT_TYPE = 'flight';
 const HOST = 'https://21.objects.htmlacademy.pro/big-trip';
-const TOKEN = 'Basic dXNlckBwYXNzd29yZAo=';
+const TOKEN = 'Basic drhd9rehd0dr057a';
 
 const BASE_POINT = {
   basePrice: 0,
