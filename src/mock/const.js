@@ -155,6 +155,7 @@ const DATE_FORMAT = {
   WITH_DELIMITER: 'DD/MM/YY HH:mm',
   WITH_DELIMITER_FLAT_PICKER: 'd/m/y H:i',
 };
+
 const DURATION_FORMAT = {
   DAYS: 'DD[D] HH[H] mm[M]',
   HOURS: 'HH[H] mm[M]',
