@@ -1,15 +1,16 @@
 const POINTS_COUNT = 5;
 
-const MSEC_IN_SEC = 1000;
-const SEC_IN_MIN = 60;
-const MIN_IN_HOUR = 60;
-const HOUR_IN_DAY = 24;
+const MILLISECONDS_IN_SECOND = 1000;
+const SECONDS_IN_MINUTE = 60;
+const MINUTES_IN_HOUR = 60;
+const HOURS_IN_DAY = 24;
+
+const MILLISECONDS_IN_HOUR = MILLISECONDS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR;
+const MILLISECONDS_IN_DAY = MILLISECONDS_IN_HOUR * HOURS_IN_DAY;
+
 const MAX_PRICE_VALUE = 200;
 const MAX_IMAGES_COUNT = 5;
-
-const MSEC_IN_HOUR = MSEC_IN_SEC * SEC_IN_MIN * MIN_IN_HOUR;
-const MSEC_IN_DAY = MSEC_IN_HOUR * HOUR_IN_DAY;
-const BASE_EVENT_TYPE = 'taxi';
+const EVENT_TYPE = 'taxi';
 const HOST = 'https://21.objects.htmlacademy.pro/big-trip';
 const TOKEN = 'Basic drhd9rehd0dr057a';
 
@@ -20,20 +21,14 @@ const BASE_POINT = {
   destination: null,
   isFavorite: false,
   offers: [],
-  type: BASE_EVENT_TYPE,
-};
-
-const MethodHttp = {
-  GET: 'GET',
-  PUT: 'PUT',
-  POST: 'POST',
-  DELETE: 'DELETE',
+  type: EVENT_TYPE,
 };
 
 const REQUIRED_BASE_POINT_FIELDS = ['dateFrom', 'dateTo', 'destination', 'type'];
+
 const REQUIRED_POINT_FIELDS = ['dateFrom', 'dateTo', 'destination', 'type', 'basePrice'];
 
-const EVENT_TYPES = [
+const TYPES_OF_EVENT = [
   'taxi',
   'bus',
   'train',
@@ -47,7 +42,6 @@ const EVENT_TYPES = [
 
 const CITIES = [
   'Accra',
-  'Aktobe',
   'Alexandria',
   'Algiers',
   'Almaty',
@@ -57,7 +51,6 @@ const CITIES = [
   'Antananarivo',
   'Antwerp',
   'Anshan',
-  'Ahmedaba',
   'Astana',
   'Asuncion',
   'Athens',
@@ -76,14 +69,21 @@ const DESCRIPTIONS = [
   'You can be sure that your holiday will be unforgettable and safe.',
 ];
 
-const TRIP_POINTS_COUNT = 3;
+const MAX_DISPLAYED_TRIP_POINTS = 3;
 
-const EditType = {
+const MethodHttp = {
+  GET: 'GET',
+  PUT: 'PUT',
+  POST: 'POST',
+  DELETE: 'DELETE',
+};
+
+const EDITING_BY_TYPE = {
   EDITING: 'Editing point',
   CREATING: 'Creating point',
 };
 
-const PointMode = {
+const PointCondition = {
   IDLE: 'IDLE',
   EDITABLE: 'EDITABLE',
 };
@@ -94,14 +94,14 @@ const PointEnd = {
   DESTINATIONS: 'destinations',
 };
 
-const FilterType = {
+const FILTERS_BY_TYPES = {
   ANY: 'any',
   FUTURE: 'future',
   PRESENT: 'present',
   PAST: 'past'
 };
 
-const SortType = {
+const SORTING_BY_TYPE = {
   DAY: 'day',
   EVENT: 'event',
   TIME: 'time',
@@ -109,53 +109,53 @@ const SortType = {
   OFFER: 'offer',
 };
 
-const FilterSettings = {
-  [FilterType.ANY]: {
+const SettingsForFilters = {
+  [FILTERS_BY_TYPES.ANY]: {
     label: 'Everything',
     defaultSelected: true,
   },
-  [FilterType.FUTURE]: { label: 'Future' },
-  [FilterType.PRESENT]: { label: 'Present' },
-  [FilterType.PAST]: { label: 'Past' },
+  [FILTERS_BY_TYPES.FUTURE]: { label: 'Future' },
+  [FILTERS_BY_TYPES.PRESENT]: { label: 'Present' },
+  [FILTERS_BY_TYPES.PAST]: { label: 'Past' },
 };
 
-const SORTING_COLUMNS = [
+const SORTING_ITEMS = [
   {
-    type: SortType.DAY,
+    type: SORTING_BY_TYPE.DAY,
     label: 'Day',
     active: true,
     defaultSelected: true,
   },
   {
-    type: SortType.EVENT,
+    type: SORTING_BY_TYPE.EVENT,
     label: 'Event',
     active: false,
   },
   {
-    type: SortType.TIME,
+    type: SORTING_BY_TYPE.TIME,
     label: 'Time',
     active: true,
   },
   {
-    type: SortType.PRICE,
+    type: SORTING_BY_TYPE.PRICE,
     label: 'Price',
     active: true,
   },
   {
-    type: SortType.OFFER,
+    type: SORTING_BY_TYPE.OFFER,
     label: 'Offer',
     active: false,
   },
 ];
 
-const DateFormat = {
+const DATE_FORMAT = {
   TIME: 'HH:mm',
   SHORT: 'MMM DD',
   FULL: 'YYYY-MM-DDTHH:mm',
   WITH_DELIMITER: 'DD/MM/YY HH:mm',
   WITH_DELIMITER_FLAT_PICKER: 'd/m/y H:i',
 };
-const DurationFormat = {
+const DURATION_FORMAT = {
   DAYS: 'DD[D] HH[H] mm[M]',
   HOURS: 'HH[H] mm[M]',
   MINS: 'mm[M]',
@@ -169,7 +169,7 @@ const MocksMaxCount = {
   POINTS: 5,
 };
 
-const UpdateType = {
+const UPDATING_BY_TYPE = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
@@ -189,27 +189,27 @@ const LimitBlock = {
 
 export {
   POINTS_COUNT,
-  EVENT_TYPES,
+  TYPES_OF_EVENT,
   MAX_PRICE_VALUE,
   MAX_IMAGES_COUNT,
   CITIES,
   DESCRIPTIONS,
-  SORTING_COLUMNS,
+  SORTING_ITEMS,
   BASE_POINT,
   REQUIRED_BASE_POINT_FIELDS,
-  TRIP_POINTS_COUNT,
-  FilterType,
-  FilterSettings,
-  SortType,
-  DateFormat,
-  DurationFormat,
+  MAX_DISPLAYED_TRIP_POINTS,
+  FILTERS_BY_TYPES,
+  SettingsForFilters,
+  SORTING_BY_TYPE,
+  DATE_FORMAT,
+  DURATION_FORMAT,
   Price,
   MocksMaxCount,
-  MSEC_IN_HOUR,
-  MSEC_IN_DAY,
-  PointMode,
-  UpdateType,
-  EditType,
+  MILLISECONDS_IN_DAY,
+  MILLISECONDS_IN_HOUR,
+  PointCondition,
+  UPDATING_BY_TYPE,
+  EDITING_BY_TYPE,
   TOKEN,
   MethodHttp,
   PointEnd,
